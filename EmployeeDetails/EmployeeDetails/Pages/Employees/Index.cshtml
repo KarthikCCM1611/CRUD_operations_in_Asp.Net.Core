@@ -1,0 +1,36 @@
+﻿@page
+@model EmployeeDetails.Pages.EmployeesModel
+@{
+}
+
+<h2>List of Employees </h2>
+<a class="btn btn-primary" href="/Employees/Create">New Employee</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Emp ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Phone Number</th>
+            <th>Action</th>
+        </tr>       
+    </thead>
+    <tbody>
+        @foreach(var emp in Model.employees)
+        {
+            <tr>
+                <td>@emp.empId</td>
+                <td>@emp.name</td>
+                <td>@emp.email</td>
+                <td>@emp.department</td>
+                <td>@emp.phoneNumber</td>
+                <td>
+                    <a class="btn btn-primary" href="/Employees/Edit?id=@emp.empId">Edit</a>
+                    <a class="btn btn-danger" href="/Employees/Delete?id=@emp.empId">Delete</a>
+                </td>
+            </tr>                   
+        }
+    </tbody>
+</table>

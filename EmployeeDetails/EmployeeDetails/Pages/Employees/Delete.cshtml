@@ -1,0 +1,22 @@
+﻿@page
+@using System.Data.SqlClient;
+@model EmployeeDetails.Pages.Employees.DeleteModel
+@{
+    try
+    {
+        String id = Request.Query["id"];
+        string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=EmployeeData;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        SqlConnection connection = new SqlConnection(connectionString);
+        connection.Open();
+        string deleteQuery = "DELETE FROM EmpDetails WHERE empId=@id";
+        SqlCommand command = new SqlCommand(deleteQuery, connection);
+        command.Parameters.AddWithValue("@id", id);
+        int rows = command.ExecuteNonQuery();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Exception:" + ex.ToString());
+        return;
+    }
+    Response.Redirect("/Employees/Index");
+}
